@@ -41,3 +41,12 @@ def next_permutation(permutation):
     permutation[k], permutation[j] = permutation[j], permutation[k]
     permutation = permutation[:k + 1] + list(reversed(permutation[k + 1:]))
     return permutation
+
+
+def get_primes_by_sieve(n):
+    sieve = [False, False, True] + [True] * n
+    for candidate in range(2, int(n ** 0.5) + 1):
+        if sieve[candidate]:
+            for composite in range(candidate ** 2, n + 1, candidate):
+                sieve[composite] = False
+    return (x for x in range(n) if sieve[x])
